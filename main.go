@@ -87,11 +87,10 @@ var ConversationHistory []Content
 var CurrentState string = "INIT"         // የሲስተሙ ቴክኒካል ስቴት (UI Engine)
 var ActiveTacticalPhase string = "RECON" // የሳይበር ደህንነት ታክቲካዊ ምዕራፍ (Cyber Security Phase)
 
-// Automated GitHub Self-Updater
+// Automated GitHub Self-Updater with Auto-Recompilation
 func checkAndApplyUpdate() {
 	fmt.Printf("%s[*] Checking GitHub for new updates...%s\r", Dim+Yellow, Reset)
 	
-	// ማሳሰቢያ፦ የጊትሀብ ዩዘርኔም እና የሪፖዚቶሪ ስምህን እዚህ ጋር ማስተካከል ትችላለህ
 	versionURL := "https://raw.githubusercontent.com/ANK-369/AI-CLI/main/version.txt"
 	repoURL    := "https://raw.githubusercontent.com/ANK-369/AI-CLI/main/main.go"
 
@@ -126,7 +125,19 @@ func checkAndApplyUpdate() {
 			if err == nil {
 				err = os.WriteFile("main.go", newCode, 0644)
 				if err == nil {
-					fmt.Printf("%s[+] AI-CLI successfully updated to v%s! Please restart the tool.%s\n", Green, latestVersion, Reset)
+					fmt.Printf("%s[*] Optimization Engine: Recompiling aicli binary...%s\r", Dim+Yellow, Reset)
+					
+					os.Remove("aicli") 
+					
+					buildCmd := exec.Command("go", "build", "-ldflags=-s -w", "-o", "aicli", "main.go")
+					if buildErr := buildCmd.Run(); buildErr != nil {
+						fmt.Printf("%s[-] Recompilation failed: %v%s\n", Red, buildErr, Reset)
+						return
+					}
+					
+					_ = os.Remove("main.go")
+					
+					fmt.Printf("%s[+] AI-CLI successfully updated and optimized to v%s! Please restart ./aicli%s\n", Green, latestVersion, Reset)
 					os.Exit(0)
 				} else {
 					fmt.Printf("%s[-] Failed to write update payload: %v%s\n", Red, err, Reset)
@@ -134,12 +145,43 @@ func checkAndApplyUpdate() {
 			}
 		}
 	} else {
-		fmt.Print("\r\033[K") 
+		fmt.Printf("\r\033[K%s[+] AI-CLI is already up to date (v%s).%s\n", Green, LocalVersion, Reset)
 	}
 }
 
 func main() {
-	// የራስ-አፕዴት ፈንክሽን እዚህ ቀድሞ ይነሳል
+	// 💡 አውቶማቲክ ቡትስትራፕ እና ኢንቫይሮንመንት ማጽጃ ሎጂክ
+	if !strings.Contains(os.Args[0], "aicli") {
+		// 1. 'aicli' ባይነሪ ፋይል በአካባቢው ከሌለ ራሱ በራስ-ሰር ይገነባዋል
+		if _, err := os.Stat("aicli"); os.IsNotExist(err) {
+			fmt.Printf("%s[*] First-time Initialization: Generating optimized 'aicli' binary...%s\n", Yellow, Reset)
+			buildCmd := exec.Command("go", "build", "-ldflags=-s -w", "-o", "aicli", "main.go")
+			if err := buildCmd.Run(); err != nil {
+				fmt.Printf("%s[-] Auto-build failed: %v%s\n", Red, err, Reset)
+				return
+			}
+			fmt.Printf("%s[+] Success! 'aicli' binary generated.%s\n", Green, Reset)
+		}
+
+		// 2. 'main.go' የምንጭ ኮዱን ሙሉ በሙሉ ይሰርዛል (Clean Environment)
+		if _, err := os.Stat("main.go"); err == nil {
+			_ = os.Remove("main.go")
+		}
+
+		// 3. አዲስ የተፈጠረውን `./aicli` በራሱ በራስ-ሰር ተርሚናሉ ላይ ያስነሳል
+		cmd := exec.Command("./aicli")
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		if err := cmd.Run(); err != nil {
+			fmt.Printf("%s[-] Execution failed: %v%s\n", Red, err, Reset)
+		}
+		
+		// የ 'go run' ጊዜያዊ ፕሮሰስን እዚህ ላይ ያበቃል
+		os.Exit(0)
+	}
+
+	// የራስ-አፕዴት ፈንክሽን
 	checkAndApplyUpdate()
 
 	apiKey := os.Getenv("GEMINI_API_KEY")
@@ -195,7 +237,7 @@ func main() {
 				Parts: []Part{{Text: rawJsonText}},
 			})
 
-			// የታክቲካዊ ምዕራፍ ማመሳሰያ (Sync with AI decision)
+			// የታክቲካዊ ምዕራፍ ማመሳሰያ
 			if aiCmd.TacticalPhase != "" {
 				ActiveTacticalPhase = aiCmd.TacticalPhase
 			}
@@ -491,7 +533,6 @@ func renderFriendlyResponse(apiKey string) {
 func askGemini(apiKey string, history []Content) (*AIResponse, string, error) {
 	apiURL := "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey
 
-	// 5ቱን ታክቲካዊ ምዕራፎች በግድ እንዲከተል የተደረገ የስርዓት ህግ (System Instruction)
 	systemRule := "You are an elite automated security orchestration engine built for a Kali Linux PRoot environment on Android. " +
 		"You operate inside a strict 5-stage tactical security framework. You MUST execute them in sequential order based on current findings:\n" +
 		"1. 'RECON' (Subdomain discovery, OSINT)\n" +
@@ -517,9 +558,9 @@ func askGemini(apiKey string, history []Content) (*AIResponse, string, error) {
 				Type: "OBJECT",
 				Properties: map[string]SchemaField{
 					"context":        {Type: "STRING"},
-					"tactical_phase": {Type: "STRING"}, // RECON, SCANNING, VULN_ANALYSIS, EXPLOIT, REPORTING
+					"tactical_phase": {Type: "STRING"}, 
 					"reasoning":      {Type: "STRING"},
-					"status":         {Type: "STRING"}, // CONTINUE, PROGRESS_PHASE, COMPLETE
+					"status":         {Type: "STRING"}, 
 					"recommended_action": {
 						Type: "OBJECT",
 						Props: map[string]SchemaField{
@@ -545,9 +586,9 @@ func askGemini(apiKey string, history []Content) (*AIResponse, string, error) {
 		if err != nil {
 			return nil, "", err
 		}
-		defer resp.Body.Close()
 
 		body, err := io.ReadAll(resp.Body)
+		resp.Body.Close() 
 		if err != nil {
 			return nil, "", err
 		}
