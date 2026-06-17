@@ -1,2 +1,85 @@
 # AI-CLI
-AI-CLI: an AI-powered automated security orchestration engine and CLI tool built in Go for Termux &amp; Kali Linux. Driven by Gemini API with a strict 5-stage tactical framework, live dashboard tracking, and an automated self-updater
+
+# AI-CLI: አውቶማቲክ የሳይበር ደህንነት ኦርኬስትሬሽን መሳሪያ
+
+AI-CLI በGo (Golang) ቋንቋ የተገነባ፣ በተለይ በKali Linux (PRoot) እና በሌሎችም ሊኑክስ ሲስተሞች ላይ ለመጠቀም ታስቦ የተዘጋጀ የሳይበር ደህንነት ታክቲካል ኦርኬስትሬሽን መሳሪያ ነው። ይህ መሳሪያ የGoogle Gemini AI ሞዴልን በመጠቀም የደህንነት ኦዲት ሂደቶችን በራስ-ሰር እንዲቀጥሉ ያደርጋል።
+
+---
+
+## 🚀 ዋና ዋና ባህሪያት
+
+* **አውቶማቲክ ኮምፓይሌሽን (Auto-Build):** መሳሪያው ለመጀመሪያ ጊዜ ሲነሳ በራሱ `aicli` የተሰኘ ባይነሪ (binary) ይፈጥራል።
+* **አውቶማቲክ ማሻሻያ (Auto-Update):** ከGitHub ላይ አዳዲስ ስሪቶችን በራሱ ይፈትሻል እና ያዘምናል (Auto-recompile)።
+* **Gemini AI ውህደት:** ለሳይበር ደህንነት ኦዲት ስልታዊ ውሳኔዎችን ለመስጠት የGemini 2.5 Flash ሞዴልን ይጠቀማል።
+* **5-ደረጃ ታክቲካዊ ኦርኬስትሬሽን:** ስራውን በታቀደ መንገድ በቅደም ተከተል ይፈጽማል (Recon -> Scanning -> Vuln Analysis -> Exploit -> Reporting)።
+* **ኢንተራክቲቭ ተሞክሮ:** እያንዳንዱን እርምጃ ከመፈጸሙ በፊት የተጠቃሚውን ፍቃድ ይፈልጋል (User Approval Gatekeeper)።
+* **የደህንነት ዳሽቦርድ:** የስራውን ሂደት (Progress)፣ ጊዜ እና የአፈጻጸም ሁኔታ በእውነተኛ ሰዓት (Live Dashboard) ያሳያል።
+
+---
+
+## 🛠 ቅድመ ሁኔታዎች (Requirements)
+
+ይህንን መሳሪያ ከመጠቀምዎ በፊት የሚከተሉት ነገሮች ማሟላት አለባቸው፡
+
+1. **Golang:** በስርዓትዎ ላይ `go` መጫኑን ያረጋግጡ።
+2. **Gemini API Key:** ከ [Google AI Studio](https://aistudio.google.com/) የተገኘ ትክክለኛ የAPI ቁልፍ።
+3. **የተጫኑ የደህንነት መሳሪያዎች:** ኦርኬስትሬሽኑን ለመጠቀም እንደ `nmap` ያሉ የደህንነት መሳሪያዎች በስርዓትዎ ላይ መጫን አለባቸው።
+
+---
+
+## 📥 አጠቃቀም (How to Use)
+
+### 1. ማዋቀር (Setup)
+
+የGemini API ቁልፍዎን እንደ ኢንቫይሮንመንት ቫሪያብል ማቀናበር አለብዎት፡
+
+```bash
+# ለሊኑክስ ወይም ተርሚናል ተጠቃሚዎች
+export GEMINI_API_KEY="የእርስዎን_API_KEY_እዚህ_ያስገቡ"
+
+```
+
+### 2. ማሄድ (Execution)
+
+መጀመሪያ `main.go` ፋይሉን ወደሚያገኙበት ማህደር ይሂዱና የሚከተለውን ትዕዛዝ ያስገቡ፡
+
+```bash
+go run main.go
+
+```
+
+**ምን ይከሰታል?**
+
+* መጀመሪያ `aicli` የተባለ ፈጣን ባይነሪ ፋይል ይፈጥራል።
+* `main.go` ፋይሉን በራሱ ይሰርዘዋል (ለደህንነት እና ለጽዳት)።
+* በመቀጠል `./aicli` የሚለውን ፕሮግራም ይጀምራል።
+
+---
+
+## 📋 ታክቲካዊ ምዕራፎች (Tactical Stages)
+
+መሳሪያው የሚከተሉትን 5 ደረጃዎች በቅደም ተከተል ይከተላል፡
+
+1. **RECON:** ስለ ኢላማው መረጃ መሰብሰብ (Subdomain discovery, OSINT)።
+2. **SCANNING:** ወደቦች እና አገልግሎቶችን መለየት (Port scanning)።
+3. **VULN_ANALYSIS:** የተገኙ ተጋላጭነቶችን መመርመር።
+4. **EXPLOIT:** ተጋላጭነቶችን መፈተሽ (Payload verification)።
+5. **REPORTING:** የተገኙትን መረጃዎች በጥሩ ሁኔታ አደራጅቶ ማቅረብ (Matrix Reporting)።
+
+---
+
+## ⚠️ የደህንነት ማስጠንቀቂያ
+
+ይህ መሳሪያ ለ**ህጋዊ እና ስነ-ምግባር በተላበሰ የደህንነት ሙከራ (Authorized Security Auditing)** ብቻ የተዘጋጀ ነው። ያለ ባለቤት ፈቃድ በማንኛውም ሲስተም ላይ ይህን መሳሪያ መጠቀም ህገ-ወጥ ነው።
+
+---
+
+## 🛠 የኮድ አወቃቀር ማስታወሻዎች
+
+* **API Rate Limiting:** መሳሪያው የAPI ገደብ ካጋጠመው በራሱ ለ25 ሰከንዶች ታግቶ እንደገና ይሞክራል።
+* **Data Cleaning:** በየደረጃው የሚገኙ የLOG መረጃዎችን በራስ-ሰር ይሰበስባል እና በሪፖርት ማውጫው ላይ በሰንጠረዥ መልክ ያሳያል።
+* **Environment:** በPRoot ወይም በTermux ላይ ለመስራት ተብሎ ስለተመቻቸ፣ `nmap` ሲጠቀም `--unprivileged` እና `-sT` ፍላጎችን በራስ-ሰር ይጨምራል።
+
+---
+
+*በ ANK-369 የተገነባ።*
