@@ -32,19 +32,56 @@ AI-CLI በGo (Golang) ቋንቋ የተገነባ፣ በተለይ በKali Linux (P
 
 ---
 
-## 📥 አጠቃቀም (How to Use)
+## አጠቃቀም (How to Use)
 
-### 1. ማዋቀር (Setup)
+###  API Key Setup
 
-የGemini API ቁልፍዎን እንደ ኢንቫይሮንመንት ቫሪያብል ማቀናበር አለብዎት፡
+To keep your API key secure, add it to your shell configuration file. Choose the method below based on your shell:
 
-# ለሊኑክስ ወይም ተርሚናል ተጠቃሚዎች
+#### For Bash Users (`~/.bashrc`)
+1. Open your `.bashrc` file:
+   ```
+   nano ~/.bashrc
+   ```
+2. Add this line at the end of the file:
 ```
 export GEMINI_API_KEY="የእርስዎን_API_KEY_እዚህ_ያስገቡ"
 
 ```
 
-### 2. ማሄድ (Execution)
+3. Save and apply the changes:
+```
+source ~/.bashrc
+
+```
+
+#### For Zsh Users (`~/.zshrc`)
+
+1. Open your `.zshrc` file:
+```
+nano ~/.zshrc
+
+```
+
+2. Add this line at the end of the file:
+```
+export GEMINI_API_KEY="የእርስዎን_API_KEY_እዚህ_ያስገቡ"
+
+```
+
+3. Save and apply the changes:
+```
+source ~/.zshrc
+
+```
+
+### Git Cloning the file
+```
+git clone https://github.com/ANK-369/AI-CLI.git
+cd AI-CLI
+```
+
+### ማስሄድ (Execution)
 
 መጀመሪያ `main.go` ፋይሉን ወደሚያገኙበት ማህደር ይሂዱና የሚከተለውን ትዕዛዝ ያስገቡ፡
 
