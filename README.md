@@ -66,7 +66,7 @@ go run main.go
 መሳሪያው የሚከተሉትን 5 ደረጃዎች በቅደም ተከተል ይከተላል፡
 
 1. **RECON:** ስለ ኢላማው መረጃ መሰብሰብ (Subdomain discovery, OSINT)።
-2. **SCANNING:** ወደቦች እና አገልግሎቶችን መለየት (Port scanning)።
+2. **SCANNING:** ፖርቶች እና አገልግሎቶችን መለየት (Port scanning)።
 3. **VULN_ANALYSIS:** የተገኙ ተጋላጭነቶችን መመርመር።
 4. **EXPLOIT:** ተጋላጭነቶችን መፈተሽ (Payload verification)።
 5. **REPORTING:** የተገኙትን መረጃዎች በጥሩ ሁኔታ አደራጅቶ ማቅረብ (Matrix Reporting)።
@@ -75,15 +75,15 @@ go run main.go
 
 ## ⚠️ የደህንነት ማስጠንቀቂያ
 
-ይህ መሳሪያ ለ**ህጋዊ እና ስነ-ምግባር በተላበሰ የደህንነት ሙከራ (Authorized Security Auditing)** ብቻ የተዘጋጀ ነው። ያለ ባለቤት ፈቃድ በማንኛውም ሲስተም ላይ ይህን መሳሪያ መጠቀም ህገ-ወጥ ነው።
+ይህ መሳሪያ ለ**ህጋዊ እና ስነ-ምግባር በተላበሰ የደህንነት ሙከራ (Authorized Security Auditing)** ብቻ የተዘጋጀ ነው። ያለ ባለቤት ፈቃድ በማንኛውም ሲስተም ላይ ይህን መሳሪያ መጠቀም ህገ-ወጥ ነው😎።
 
 ---
 
 ## 🛠 የኮድ አወቃቀር ማስታወሻዎች
 
-* **API Rate Limiting:** መሳሪያው የAPI ገደብ ካጋጠመው በራሱ ለ25 ሰከንዶች ታግቶ እንደገና ይሞክራል።
+* **API Rate Limiting:** መሳሪያው የAPI ገደብ ካጋጠመው በራሱ ለ25 ሰከንዶች ታግዶ እንደገና ይሞክራል።
 * **Data Cleaning:** በየደረጃው የሚገኙ የLOG መረጃዎችን በራስ-ሰር ይሰበስባል እና በሪፖርት ማውጫው ላይ በሰንጠረዥ መልክ ያሳያል።
-* **Environment:** በPRoot ወይም በTermux ላይ ለመስራት ተብሎ ስለተመቻቸ፣ `nmap` ሲጠቀም `--unprivileged` እና `-sT` ፍላጎችን በራስ-ሰር ይጨምራል።
+* **Environment:** በPRoot ወይም በTermux ላይ ለመስራት ተብሎ ስለተመቻቸ፣ `nmap` ሲጠቀም `--unprivileged` እና `-sT` ፍላጎችን automatically ይጨምራል።
 
 ---
 
