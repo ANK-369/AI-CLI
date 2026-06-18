@@ -1,4 +1,9 @@
-# AI-CLI
+<div align="center">
+  <h1>AI-CLI</h1>
+  <img src="assets/screenshot/aicli.png" alt="AI-CLI Screenshot" width="600px">
+</div>
+
+---
 
 # AI-CLI: አውቶማቲክ የሳይበር ደህንነት ኦርኬስትሬሽን መሳሪያ
 
@@ -33,8 +38,8 @@ AI-CLI በGo (Golang) ቋንቋ የተገነባ፣ በተለይ በKali Linux (P
 
 የGemini API ቁልፍዎን እንደ ኢንቫይሮንመንት ቫሪያብል ማቀናበር አለብዎት፡
 
-```bash
 # ለሊኑክስ ወይም ተርሚናል ተጠቃሚዎች
+```
 export GEMINI_API_KEY="የእርስዎን_API_KEY_እዚህ_ያስገቡ"
 
 ```
@@ -43,7 +48,7 @@ export GEMINI_API_KEY="የእርስዎን_API_KEY_እዚህ_ያስገቡ"
 
 መጀመሪያ `main.go` ፋይሉን ወደሚያገኙበት ማህደር ይሂዱና የሚከተለውን ትዕዛዝ ያስገቡ፡
 
-```bash
+```
 go run main.go
 
 ```
@@ -82,4 +87,4 @@ go run main.go
 
 ---
 
-*በ ANK-369 የተገነባ።*
+*በ ANK369 የተገነባ።*
