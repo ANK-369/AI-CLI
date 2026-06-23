@@ -404,7 +404,7 @@ func runToolWithLiveDashboard(target, tool, phase string, retry int, arguments [
 }
 
 func generateAndPrintStructuredSummary(apiKey string, allOutputs string) {
-	apiURL := "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey
+	apiURL := "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey
 
 	summaryPrompt := "You are an elite automated security auditing parser. Analyze the given tool raw outputs and map out a structured matrix report. " +
 		"CRITICAL STYLING MANIFESTO:\n" +
@@ -497,7 +497,7 @@ func generateAndPrintStructuredSummary(apiKey string, allOutputs string) {
 }
 
 func renderFriendlyResponse(apiKey string) {
-	apiURL := "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey
+	apiURL := "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey
 
 	reqPayload := map[string]interface{}{"contents": ConversationHistory}
 	jsonData, _ := json.Marshal(reqPayload)
@@ -531,7 +531,7 @@ func renderFriendlyResponse(apiKey string) {
 }
 
 func askGemini(apiKey string, history []Content) (*AIResponse, string, error) {
-	apiURL := "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey
+	apiURL := "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey
 
 	systemRule := "You are an elite automated security orchestration engine built for a Kali Linux PRoot environment on Android. " +
 		"You operate inside a strict 5-stage tactical security framework. You MUST execute them in sequential order based on current findings:\n" +
